@@ -9,7 +9,11 @@ import {aiRouter} from './routes/aiRoute.js'
 
 const app =express()
 
-app.use(cors())
+app.use(cors({
+    origin:process.env.NODE_ENV === "production"
+    ? process.env.FRONTEND_URL
+    : "http://localhost:5000";
+}))
 app.use(express.json())
 
 db_connect()
